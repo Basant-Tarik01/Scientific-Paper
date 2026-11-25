@@ -1,0 +1,9 @@
+# Python dependencies outside ROS (ROS 2 Humble provides rclpy etc. via apt)
+numpy>=1.21
+pyyaml>=5.4
+matplotlib>=3.5
+gymnasium>=0.29,<1.0
+# optional, for examples/train_ppo.py (A1 baselines)
+# torch
+# stable-baselines3>=2.0
+# sb3-contrib>=2.0

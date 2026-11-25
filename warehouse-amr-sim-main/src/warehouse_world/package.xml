@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>warehouse_world</name>
+  <version>0.1.0</version>
+  <description>Generated Gazebo worlds and Nav2 maps of the warehouse (source of truth: amr_sim_core/data/worlds/*.yaml).</description>
+  <maintainer email="maintainer@example.com">warehouse-amr-sim team</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>amr_gazebo_plugins</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

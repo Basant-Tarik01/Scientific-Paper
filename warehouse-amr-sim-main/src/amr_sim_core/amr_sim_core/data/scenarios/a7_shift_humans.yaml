@@ -1,0 +1,16 @@
+# A7 distribution shift: unseen pedestrian behaviour (fast, all distracted) for trust-meter tests.
+name: a7_shift_humans
+world: warehouse_small
+episode: {max_time: 60.0, goal_tolerance: 0.3, min_goal_distance: 6.0, max_goal_distance: 25.0}
+pedestrians:
+  density: [high]
+  distracted_fraction: 1.0
+  speed: [1.4, 1.9]
+  dwell_prob: 0.1
+  dwell_time: [1.0, 2.0]
+payload: [0.0, 60.0]
+faults:
+  p_nominal: 1.0
+  types: []
+controller: {speed_scale: [0.4, 1.0], speed_change_prob: 0.02, stop_prob: 0.005}
+metrics: {near_miss_distance: 0.5}

@@ -1,0 +1,116 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{parskip} % Adds space between paragraphs instead of indenting
+\usepackage{authblk} % Package for formatting authors and affiliations
+
+% --- Title and Authors ---
+\title{\textbf{Health-Conditioned Reinforcement Learning for Safe Human-Aware Navigation}}
+
+\author[1]{Basant Tarik Salah}
+\author[1]{Saleh Mahmoud Nassar}
+\author[2]{Mohamed Adel}
+\affil{Department of Mechatronics and Robotics Engineering, Egypt-Japan University of Science and Technology (E-JUST), Alexandria, Egypt}
+
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Related Work}
+\label{sec:related_work}
+
+\subsection{Deep Reinforcement Learning for Human-Aware Navigation}
+Safe navigation in human-populated environments is a fundamental requirement for deploying autonomous mobile robots (AMRs) in shared spaces like warehouses. The field has largely shifted from classical geometric planners---which often suffer from the ``freezing robot problem'' in dense crowds---toward Deep Reinforcement Learning (DRL). DRL enables end-to-end learning of reactive, socially compliant policies directly from experience. 
+
+A major thread of this literature focuses on reward design and interaction modeling. Early works established that social norms, such as passing on the right, can be learned by penalizing norm violations rather than relying on hand-coded human behavior models \cite{chen2017socially}. To handle dense, interactive scenarios, researchers moved beyond one-way human-robot avoidance to explicitly model crowd-robot and human-human interactions using self-attention mechanisms \cite{chen2018crowd}. Subsequent works improved scalability and safety in dense crowds by utilizing relative velocity-based rewards \cite{xie2023drlvo}, balancing safety-efficiency trade-offs \cite{l2b2023}, and employing graph-based attention to focus on the most critical pedestrians \cite{chen2019robot}. 
+
+To handle partially observable and constrained environments, various architectural advancements have been proposed. Structural Recurrent Neural Networks (RNNs) have been used to reason about spatial and temporal relationships among agents without expert supervision \cite{liu2020decentralized}. Other approaches have integrated velocity obstacles \cite{xie2023drlvo}, multi-agent distributed collision avoidance \cite{chen2016decentralized}, and specialized reward models for socially conscious navigation \cite{socially_conscious_nav}. Furthermore, recent works have explored navigating in constrained pedestrian environments \cite{perez2020robot}, handling dynamic decision-making agents \cite{everett2021motion}, and navigating VUCA (Volatile, Uncertain, Complex, Ambiguous) environments \cite{vuca_nav}. Collectively, these works demonstrate that DRL can anticipate human dynamics and navigate safely in complex crowds.
+
+\subsection{Capability-Aware and Fault-Aware Safety Filters}
+A parallel line of research addresses safety by adding explicit safety filters, capability models, or fault-diagnosis modules around the navigation policy. In multi-robot settings, Kim et al. \cite{kim2026capability} introduced a Capability-Aware Backup-Recoverability Filter (CA-BRF) for heterogeneous robots. Their work demonstrates that safety constraints must account for what each robot is physically capable of doing (e.g., braking distances, turning radii). However, their approach relies on classical Control Barrier Functions (CBFs) and model-based optimization rather than end-to-end learned DRL for human-aware navigation.
+
+To handle explicit faults, Yilmaz et al. \cite{yilmaz2026fault} proposed a fault-diagnosis-aware adaptive policy switching framework. They use a temporal classifier to detect discrete sensor or control degradation and route control to a specialized policy. While this proves that explicit health-state estimation is operationally useful, it relies on discrete fault labels and modular switching, rather than a continuous latent inference integrated directly into a socially aware navigation policy. These capability-aware and fault-aware methods show that safety should depend on the robot's actual physical limits, but they are not designed to learn end-to-end social behavior in dense crowds.
+
+% --- NEW PARAGRAPH ADDED TO CLARIFY THE SAFETY FILTER BASELINE ---
+A related approach uses a runtime safety filter wrapped around a learned policy to constrain actions. However, the effectiveness of such filters depends on whether their underlying models and state estimates remain valid under degradation. If the robot's braking distance increases due to actuator wear, a filter assuming nominal dynamics may no longer guarantee safety. This proposal will include a specified runtime safety filter as a baseline, explicitly documenting its assumptions and interface, to test whether explicit health inference offers an advantage over filter-based safety under actuator and sensor faults.
+
+\subsection{Continuous Health Inference in Reinforcement Learning}
+The most relevant recent advancement is the introduction of continuous health inference within the RL loop. Zhang et al. \cite{zhang2026joint} proposed a Joint-Health-Aware RL framework that uses a ``HealthNet'' to estimate continuous, per-joint actuator degradation from observation-action history. By conditioning the policy on this estimated health vector, the controller can redistribute control effort across healthy and degraded joints. This is a major step beyond standard domain randomization, as it proves that explicit continuous self-health inference is a stronger design than simply hoping a robust policy will absorb hidden variations.
+
+However, the scope of Zhang et al. is limited to single-robot locomotion and manipulation tasks (e.g., Walker, Go2, Cassie). The primary risk in their setting is a loss of balance or a dropped object. They do not study multi-agent social interaction, pedestrian comfort, or the safety problems that arise when degraded motion unfolds in shared human space.
+
+\subsection{The Missing Dimension: Self-Health in Human-Aware Navigation}
+While the aforementioned literature excels at modeling \textit{external} uncertainty (e.g., pedestrian intent, crowd density, and partial observability), it predominantly assumes a \textit{nominal} robot. That is, the policies assume the robot's actuators and sensors function exactly as designed. However, real-world AMRs degrade over time. Actuator wear, latency, encoder drift, and LiDAR dropout fundamentally alter the robot's dynamics, increasing stopping distances and creating blind spots. 
+
+Current DRL human-aware baselines \cite{chen2018crowd, liu2020decentralized, xie2023drlvo} generally treat the robot's physical state as a fixed, idealized variable rather than a latent state to be estimated. In a shared warehouse aisle, a policy that is socially competent under nominal conditions can become highly unsafe if it cannot account for its own increased braking distance or delayed command execution. The stakes in human-aware navigation are fundamentally higher than in locomotion: a degraded robot does not just fail to walk; it becomes a lethal hazard to nearby pedestrians.
+
+% --- NEW SENTENCE ADDED TO EXPLICITLY MENTION DOMAIN RANDOMISATION ---
+This challenge is not fully addressed by domain randomisation, which trains a policy to be robust across a distribution of dynamics parameters but does not provide an explicit estimate of the robot's current health state. A domain-randomised policy learns a single, blindly conservative behavior; it does not adapt its safety margins dynamically as degradation worsens. This proposal specifically targets this gap by testing whether explicit health inference enables safer, more adaptive behavior around humans under selected faults.
+
+\subsection{Bridging the Gap: Temporal Inference for Self-Health}
+To address partial observability and temporal dynamics, many DRL navigation architectures already incorporate recurrence (e.g., LSTMs or GRUs) or short observation histories \cite{liu2020decentralized, xie2023drlvo}. However, these temporal mechanisms are exclusively utilized to predict human motion, infer pedestrian intent, or smooth control output. They do not explicitly infer the robot's own latent health state. 
+
+A standard recurrent policy might implicitly notice that an action did not have the expected effect, but it lacks a compact, explicit belief about its own degradation. To the best of our knowledge, no prior work in human-aware navigation has explicitly trained a policy to infer its own continuous health state from observation history to condition its safety behavior around pedestrians. This proposal addresses this gap by employing a teacher-student paradigm. The teacher utilizes a privileged simulator health vector $\mathbf{h}$ (e.g., wheel-gain loss, latency, LiDAR dropout) during training only. The student must infer a latent health estimate $\hat{\mathbf{h}}$ from action-observation history alone, conditioning its behavior near humans to ensure safety as fault severity increases. Unlike standard domain randomisation, which blindly optimizes for robustness, our student explicitly estimates degradation, allowing it to adapt its safety margins dynamically rather than adopting a single conservative behavior.
+
+% ==========================================
+% BIBLIOGRAPHY
+% ==========================================
+\begin{thebibliography}{99}
+
+\bibitem{chen2017socially}
+Y. F. Chen, M. Everett, M. Liu, and J. P. How, ``Socially aware motion planning with deep reinforcement learning,'' in \textit{IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 2017.
+
+\bibitem{chen2018crowd}
+C. Chen, Y. Liu, S. Kreiss, and A. Alahi, ``Crowd-robot interaction: Crowd-aware robot navigation with attention-based deep reinforcement learning,'' in \textit{International Conference on Robotics and Automation (ICRA)}, 2018.
+
+\bibitem{xie2023drlvo}
+Z. Xie and P. Dames, ``DRL-VO: Learning to navigate through crowded dynamic scenes using velocity obstacles,'' \textit{IEEE Transactions on Robotics}, 2023.
+
+\bibitem{l2b2023}
+% Note: Please update with actual authors and publication venue
+Anonymous Authors, ``L2B: Learning to Balance the Safety-Efficiency Trade-off in Interactive Crowd-aware Robot Navigation,'' 2023.
+
+\bibitem{chen2019robot}
+Y. Chen, C. Liu, B. E. Shi, and M. Liu, ``Robot navigation in crowds by graph convolutional networks with attention learned from human gaze,'' \textit{IEEE Robotics and Automation Letters}, 2019.
+
+\bibitem{liu2020decentralized}
+S. Liu, P. Chang, W. Liang, N. Chakraborty, and K. Driggs-Campbell, ``Decentralized structural-RNN for robot crowd navigation with deep reinforcement learning,'' in \textit{International Conference on Robotics and Automation (ICRA)}, 2020.
+
+\bibitem{chen2016decentralized}
+Y. F. Chen, M. Liu, M. Everett, and J. P. How, ``Decentralized non-communicating multiagent collision avoidance with deep reinforcement learning,'' in \textit{International Conference on Robotics and Automation (ICRA)}, 2016.
+
+\bibitem{socially_conscious_nav}
+% Note: Please update with actual authors and publication venue
+Anonymous Authors, ``Socially Conscious Navigation of Mobile Robots Based on Deep Reinforcement Learning,'' Year.
+
+\bibitem{perez2020robot}
+C. Perez-D'Arpino et al., ``Robot Navigation in Constrained Pedestrian Environments using Reinforcement Learning,'' Year.
+
+\bibitem{everett2021motion}
+M. Everett et al., ``Motion Planning Among Dynamic Decision-Making Agents with Deep Reinforcement Learning,'' Year.
+
+\bibitem{vuca_nav}
+% Note: Please update with actual authors and publication venue
+Anonymous Authors, ``Robot Mapless Navigation in VUCA Environments via Deep Reinforcement Learning,'' Year.
+
+\bibitem{kim2026capability}
+J. Kim, Y. Zhang, W. Luo, and Y. Lyu, ``A Capability-Aware Backup-Recoverability Filter for Heterogeneous Multi-Robot Navigation,'' \textit{arXiv preprint}, 2026.
+
+\bibitem{yilmaz2026fault}
+T. Yilmaz and O. Aydogmus, ``Fault-Diagnosis-Aware Adaptive Policy Switching for Robust Map-Free Mobile Robot Navigation Under Sensor and Control Degradation,'' \textit{Sensors}, vol. 26, no. 6452, 2026.
+
+\bibitem{zhang2026joint}
+H. Zhang, Y. Wang, and Z. Zuo, ``Joint-Health-Aware Reinforcement Learning for Robust Robot Control Under Actuator Degradation,'' \textit{arXiv preprint arXiv:2610.41348}, 2026.
+
+\end{thebibliography}
+
+\end{document}

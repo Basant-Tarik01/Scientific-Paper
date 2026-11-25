@@ -1,0 +1,23 @@
+# colcon
+build/
+install/
+log/
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+# experiment outputs (keep them out of git; share via Drive / releases)
+results/
+runs/
+datasets/
+*.npz
+*.zip
+
+research/*.aux
+research/*.log
+research/*.out
+research/*.toc
+research/*.bbl
+research/*.blg
+research/*.synctex.gz

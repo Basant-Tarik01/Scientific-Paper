@@ -1,0 +1,24 @@
+# A7 (JEPA-style LiDAR world model): data-generation distribution.
+# Wide variation of speed profiles, payload and health; faults may start mid-episode so that the
+# "surprise" (trust meter) signal can be evaluated around the onset.
+name: a7_data
+world: warehouse_small
+episode: {max_time: 60.0, goal_tolerance: 0.3, min_goal_distance: 6.0, max_goal_distance: 25.0}
+pedestrians:
+  density: [none, low, medium, high]
+  distracted_fraction: 0.2
+  speed: [0.7, 1.5]
+  dwell_prob: 0.4
+  dwell_time: [2.0, 8.0]
+payload: [0.0, 60.0]
+faults:
+  p_nominal: 0.4
+  types: [wheel_gain, torque_loss, cmd_latency, lidar_dropout, lidar_sector, lidar_noise, encoder_drift]
+  max_simultaneous: 2
+  severity: [0.0, 0.9]
+  onset: [0.0, 30.0]            # uniformly sampled onset time (s)
+controller:                     # scripted driver used for data generation
+  speed_scale: [0.4, 1.0]       # random cruise speed (fraction of max) per episode
+  speed_change_prob: 0.02       # per step probability of picking a new cruise speed
+  stop_prob: 0.005              # per step probability of a short random stop
+metrics: {near_miss_distance: 0.5}

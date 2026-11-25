@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data:; style-src 'unsafe-inline' data:">
+		<title>Zotero Report</title>
+		<link rel="stylesheet" type="text/css" href="data:text/css;base64,Ym9keSB7Cgljb2xvci1zY2hlbWU6IGxpZ2h0IGRhcms7CgkvKiBUaGVzZSBzaG91bGQgYmUgdGhlIGRlZmF1bHRzLCBidXQganVzdCBpbiBjYXNlOiAqLwoJYmFja2dyb3VuZDogQ2FudmFzOwoJY29sb3I6IENhbnZhc1RleHQ7Cn0KCmEgewoJdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7Cn0KCmJvZHkgewoJcGFkZGluZzogMDsKfQoKdWwucmVwb3J0IGxpLml0ZW0gewoJYm9yZGVyLXRvcDogNHB4IHNvbGlkICM1NTU7CglwYWRkaW5nLXRvcDogMWVtOwoJcGFkZGluZy1sZWZ0OiAxZW07CglwYWRkaW5nLXJpZ2h0OiAxZW07CgltYXJnaW4tYm90dG9tOiAyZW07Cn0KCmgxLCBoMiwgaDMsIGg0LCBoNSwgaDYgewoJZm9udC13ZWlnaHQ6IG5vcm1hbDsKfQoKaDIgewoJbWFyZ2luOiAwIDAgLjVlbTsKfQoKaDIucGFyZW50SXRlbSB7Cglmb250LXdlaWdodDogNjAwOwoJZm9udC1zaXplOiAxZW07CglwYWRkaW5nOiAwIDAgLjVlbTsKCWJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjY2NjOwp9CgovKiBJZiBjb21iaW5pbmcgY2hpbGRyZW4sIGRpc3BsYXkgcGFyZW50IHNsaWdodGx5IGxhcmdlciAqLwp1bC5yZXBvcnQuY29tYmluZUNoaWxkSXRlbXMgaDIucGFyZW50SXRlbSB7Cglmb250LXNpemU6IDEuMWVtOwoJcGFkZGluZy1ib3R0b206IC43NWVtOwoJbWFyZ2luLWJvdHRvbTogLjRlbTsKfQoKaDIucGFyZW50SXRlbSAudGl0bGUgewoJZm9udC13ZWlnaHQ6IG5vcm1hbDsKfQoKaDMgewoJbWFyZ2luLWJvdHRvbTogLjZlbTsKCWZvbnQtd2VpZ2h0OiA2MDAgIWltcG9ydGFudDsKCWZvbnQtc2l6ZTogMWVtOwoJZGlzcGxheTogYmxvY2s7Cn0KCi8qIE1ldGFkYXRhIHRhYmxlICovCnRoIHsKCXZlcnRpY2FsLWFsaWduOiB0b3A7Cgl0ZXh0LWFsaWduOiByaWdodDsKCXdpZHRoOiAxNSU7Cgl3aGl0ZS1zcGFjZTogbm93cmFwOwp9Cgp0ZCB7CglwYWRkaW5nLWxlZnQ6IC41ZW07Cn0KCgp1bC5yZXBvcnQsIHVsLm5vdGVzLCB1bC50YWdzIHsKCWxpc3Qtc3R5bGU6IG5vbmU7CgltYXJnaW4tbGVmdDogMDsKCXBhZGRpbmctbGVmdDogMDsKfQoKLyogVGFncyAqLwpoMy50YWdzIHsKCWZvbnQtc2l6ZTogMS4xZW07Cn0KCnVsLnRhZ3MgewoJbGluZS1oZWlnaHQ6IDEuNzVlbTsKCWxpc3Qtc3R5bGU6IG5vbmU7Cn0KCnVsLnRhZ3MgbGkgewoJZGlzcGxheTogaW5saW5lOwp9Cgp1bC50YWdzIGxpOm5vdCg6bGFzdC1jaGlsZCk6YWZ0ZXIgewoJY29udGVudDogJywgJzsKfQoKCi8qIENoaWxkIG5vdGVzICovCmgzLm5vdGVzIHsKCWZvbnQtc2l6ZTogMS4xZW07Cn0KCnVsLm5vdGVzIHsKCW1hcmdpbi1ib3R0b206IDEuMmVtOwp9Cgp1bC5ub3RlcyA+IGxpOmZpcnN0LWNoaWxkIHAgewoJbWFyZ2luLXRvcDogMDsKfQoKdWwubm90ZXMgPiBsaSB7CglwYWRkaW5nOiAuN2VtIDA7Cn0KCnVsLm5vdGVzID4gbGk6bm90KDpsYXN0LWNoaWxkKSB7Cglib3JkZXItYm90dG9tOiAxcHggI2NjYyBzb2xpZDsKfQoKCnVsLm5vdGVzID4gbGkgcDpmaXJzdC1jaGlsZCB7CgltYXJnaW4tdG9wOiAwOwp9Cgp1bC5ub3RlcyA+IGxpIHA6bGFzdC1jaGlsZCB7CgltYXJnaW4tYm90dG9tOiAwOwp9CgovKiBBZGQgcXVvdGF0aW9uIG1hcmtzIGFyb3VuZCBibG9ja3F1b3RlICovCnVsLm5vdGVzID4gbGkgYmxvY2txdW90ZSBwOm5vdCg6ZW1wdHkpOmJlZm9yZSwKbGkubm90ZSBibG9ja3F1b3RlIHA6bm90KDplbXB0eSk6YmVmb3JlIHsKCWNvbnRlbnQ6ICfigJwnOwp9Cgp1bC5ub3RlcyA+IGxpIGJsb2NrcXVvdGUgcDpub3QoOmVtcHR5KTpsYXN0LWNoaWxkOmFmdGVyLApsaS5ub3RlIGJsb2NrcXVvdGUgcDpub3QoOmVtcHR5KTpsYXN0LWNoaWxkOmFmdGVyIHsKCWNvbnRlbnQ6ICfigJ0nOwp9CgovKiBQcmVzZXJ2ZSB3aGl0ZXNwYWNlIG9uIHBsYWludGV4dCBub3RlcyAqLwp1bC5ub3RlcyBsaSBwLnBsYWludGV4dCwgbGkubm90ZSBwLnBsYWludGV4dCwgZGl2Lm5vdGUgcC5wbGFpbnRleHQgewoJd2hpdGUtc3BhY2U6IHByZS13cmFwOwp9CgovKiBEaXNwbGF5IHRhZ3Mgd2l0aGluIGNoaWxkIG5vdGVzIGlubGluZSAqLwp1bC5ub3RlcyBoMy50YWdzIHsKCWRpc3BsYXk6IGlubGluZTsKCWZvbnQtc2l6ZTogMWVtOwp9Cgp1bC5ub3RlcyBoMy50YWdzOmFmdGVyIHsKCWNvbnRlbnQ6ICcgJzsKfQoKdWwubm90ZXMgdWwudGFncyB7CglkaXNwbGF5OiBpbmxpbmU7Cn0KCnVsLm5vdGVzIHVsLnRhZ3MgbGk6bm90KDpsYXN0LWNoaWxkKTphZnRlciB7Cgljb250ZW50OiAnLCAnOwp9CgoKLyogQ2hpbGQgYXR0YWNobWVudHMgKi8KaDMuYXR0YWNobWVudHMgewoJZm9udC1zaXplOiAxLjFlbTsKfQoKdWwuYXR0YWNobWVudHMgbGkgewoJcGFkZGluZy10b3A6IC41ZW07Cn0KCnVsLmF0dGFjaG1lbnRzIGRpdi5ub3RlIHsKCW1hcmdpbi1sZWZ0OiAyZW07Cn0KCnVsLmF0dGFjaG1lbnRzIGRpdi5ub3RlIHA6Zmlyc3QtY2hpbGQgewoJbWFyZ2luLXRvcDogLjc1ZW07Cn0KCmRpdiB0YWJsZSB7Cglib3JkZXItY29sbGFwc2U6IGNvbGxhcHNlOwp9CgpkaXYgdGFibGUgdGQsIGRpdiB0YWJsZSB0aCB7Cglib3JkZXI6IDFweCAjY2NjIHNvbGlkOwoJYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTsKCXdvcmQtYnJlYWs6IGJyZWFrLWFsbDsKfQoKZGl2IHRhYmxlIHRkIHA6ZW1wdHk6OmFmdGVyLCBkaXYgdGFibGUgdGggcDplbXB0eTo6YWZ0ZXIgewoJY29udGVudDogIlwwMGEwIjsKfQoKZGl2IHRhYmxlIHRkICo6Zmlyc3QtY2hpbGQsIGRpdiB0YWJsZSB0aCAqOmZpcnN0LWNoaWxkIHsKCW1hcmdpbi10b3A6IDA7Cn0KCmRpdiB0YWJsZSB0ZCAqOmxhc3QtY2hpbGQsIGRpdiB0YWJsZSB0aCAqOmxhc3QtY2hpbGQgewoJbWFyZ2luLWJvdHRvbTogMDsKfQo=">
+		<link rel="stylesheet" type="text/css" media="screen,projection" href="data:text/css;base64,LyogR2VuZXJpYyBzdHlsZXMgKi8KYm9keSB7Cglmb250OiA2Mi41JSBHZW9yZ2lhLCBUaW1lcywgc2VyaWY7Cgl3aWR0aDogNzgwcHg7CgltYXJnaW46IDAgYXV0bzsKfQoKaDIgewoJZm9udC1zaXplOiAxLjVlbTsKCWxpbmUtaGVpZ2h0OiAxLjVlbTsKCWZvbnQtZmFtaWx5OiBHZW9yZ2lhLCBUaW1lcywgc2VyaWY7Cn0KCnAgewoJbGluZS1oZWlnaHQ6IDEuNWVtOwp9CgphOmFueS1saW5rIHsKCWNvbG9yOiAjOTAwOwp9CgphOmhvdmVyLCBhOmFjdGl2ZSB7Cgljb2xvcjogIzc3NzsKfQoKQG1lZGlhIChwcmVmZXJzLWNvbG9yLXNjaGVtZTogZGFyaykgewoJYTphbnktbGluayB7CgkJY29sb3I6ICNmMDA7Cgl9CgoJYTpob3ZlciwgYTphY3RpdmUgewoJCWNvbG9yOiAjOTk5OwoJfQp9CgoKdWwucmVwb3J0IHsKCWZvbnQtc2l6ZTogMS40ZW07Cgl3aWR0aDogNjgwcHg7CgltYXJnaW46IDAgYXV0bzsKCXBhZGRpbmc6IDIwcHggMjBweDsKfQoKLyogTWV0YWRhdGEgdGFibGUgKi8KdGFibGUgewoJYm9yZGVyOiAxcHggI2NjYyBzb2xpZDsKCW92ZXJmbG93OiBhdXRvOwoJd2lkdGg6IDEwMCU7CgltYXJnaW46IC4xZW0gYXV0byAuNzVlbTsKCXBhZGRpbmc6IDAuNWVtOwp9Cg==">
+		<link rel="stylesheet" type="text/css" media="print" href="data:text/css;base64,Ym9keSB7Cglmb250OiAxMnB0ICJUaW1lcyBOZXcgUm9tYW4iLCBUaW1lcywgR2VvcmdpYSwgc2VyaWY7CgltYXJnaW46IDA7Cgl3aWR0aDogYXV0bzsKfQoKLyogUGFnZSBCcmVha3MgKHBhZ2UtYnJlYWstaW5zaWRlIG9ubHkgcmVjb2duaXplZCBieSBPcGVyYSkgKi8KaDEsIGgyLCBoMywgaDQsIGg1LCBoNiB7CglwYWdlLWJyZWFrLWFmdGVyOiBhdm9pZDsKCXBhZ2UtYnJlYWstaW5zaWRlOiBhdm9pZDsKfQoKdWwsIG9sLCBkbCB7CglwYWdlLWJyZWFrLWluc2lkZTogYXZvaWQ7Cgljb2xvci1hZGp1c3Q6IGV4YWN0Owp9CgpoMiB7Cglmb250LXNpemU6IDEuM2VtOwoJbGluZS1oZWlnaHQ6IDEuM2VtOwp9CgphIHsKCWNvbG9yOiBpbmhlcml0OwoJdGV4dC1kZWNvcmF0aW9uOiBub25lOwp9Cg==">
+	</head>
+	<body>
+		<ul class="report combineChildItems">
+			<li id="item_SFFHRICV" class="item conferencePaper">
+			<h2>All Aware Robot Navigation in Human Environments Using Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Conference Paper</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Xiaojun Lu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Angela Faragasso</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Atsushi Yamashita</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Hajime Asama</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Mobile robots functioning in human environments should behave 
+with a secure and socially-compliant manner. Although many studies have 
+revealed the effectiveness of Deep Reinforcement Learning (DRL) in robot
+ navigation, most of them can only handle the presence of human as 
+independent individuals. Failing to consider groups may lead to the 
+robot getting stuck or behaving rudely, and omitting to separately 
+handle obstacles from pedestrians will cause low efficiency. In this 
+work, we present a novel all-aware neural network that utilizes DRL to 
+process groups, obstacles, and individuals simultaneously. The proposed 
+solution employs a new Group–Robot Interaction (GRI) subnetwork to 
+encode the mutual effects between groups and the robot, and a modified 
+Obstacle–Robot Unilateral interaction (ORU) subnetwork is presented to 
+avoid obstacle collisions caused by sensing noises or motion 
+uncertainties. In addition, the influences of a pedestrian, obstacle, 
+and group on other pedestrians or groups, that indirectly affect the 
+robot, are also integrated into the Human–Robot Interaction (HRI) 
+subnetwork or GRI subnetwork respectively by using map tensors. Finally,
+ the GRI, ORU, and HRI subnetworks are aggregated into a planning 
+subnetwork to train and derive an all-aware robot navigation policy 
+based on DRL. Evaluation results in both real-world and simulation 
+experiments show that the proposed approach outperforms the current 
+cuttingedge methods.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2023-10-1</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/IROS55552.2023.10341477">10.1109/IROS55552.2023.10341477</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/10341477/">https://ieeexplore.ieee.org/document/10341477/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:50 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://doi.org/10.15223/policy-029</td>
+					</tr>
+					<tr>
+					<th>Publisher</th>
+						<td>IEEE</td>
+					</tr>
+					<tr>
+					<th>Place</th>
+						<td>Detroit, MI, USA</td>
+					</tr>
+					<tr>
+					<th>ISBN</th>
+						<td>978-1-6654-9190-7</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>5989-5996</td>
+					</tr>
+					<tr>
+					<th>Proceedings Title</th>
+						<td>2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</td>
+					</tr>
+					<tr>
+					<th>Conference Name</th>
+						<td>2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:50 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:50 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_GDHE7U5N">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_VQGUA9AE" class="item preprint">
+			<h2>Crowd-Robot Interaction: Crowd-aware Robot Navigation with Attention-based Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Preprint</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Changan Chen</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Yuejiang Liu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Sven Kreiss</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Alexandre Alahi</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Mobility in an effective and socially-compliant manner is an 
+essential yet challenging task for robots operating in crowded spaces. 
+Recent works have shown the power of deep reinforcement learning 
+techniques to learn socially cooperative policies. However, their 
+cooperation ability deteriorates as the crowd grows since they typically
+ relax the problem as a one-way Human-Robot interaction problem. In this
+ work, we want to go beyond ﬁrst-order Human-Robot interaction and more 
+explicitly model Crowd-Robot Interaction (CRI). We propose to (i) 
+rethink pairwise interactions with a selfattention mechanism, and (ii) 
+jointly model Human-Robot as well as Human-Human interactions in the 
+deep reinforcement learning framework. Our model captures the 
+Human-Human interactions occurring in dense crowds that indirectly 
+affects the robot’s anticipation capability. Our proposed attentive 
+pooling mechanism learns the collective importance of neighboring humans
+ with respect to their future states. Various experiments demonstrate 
+that our model can anticipate human dynamics and navigate in crowds with
+ time efﬁciency, outperforming state-of-the-art methods.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2019-02-19</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.48550/arXiv.1809.08835">10.48550/arXiv.1809.08835</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="http://arxiv.org/abs/1809.08835">http://arxiv.org/abs/1809.08835</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:54 AM</td>
+					</tr>
+					<tr>
+					<th>Short Title</th>
+						<td>Crowd-Robot Interaction</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>arXiv.org</td>
+					</tr>
+					<tr>
+					<th>Extra</th>
+						<td>arXiv:1809.08835 [cs.RO]</td>
+					</tr>
+					<tr>
+					<th>Repository</th>
+						<td>arXiv</td>
+					</tr>
+					<tr>
+					<th>Archive ID</th>
+						<td>arXiv:1809.08835</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:54 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:54 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="tags">Tags:</h3>
+				<ul class="tags">
+					<li>Computer Science - Machine Learning</li>
+					<li>Computer Science - Robotics</li>
+				</ul>
+				<h3 class="notes">Notes:</h3>
+				<ul class="notes">
+					<li id="item_X98UELAZ">
+<p class="plaintext">Comment: Accepted at ICRA2019</p>
+					</li>
+				</ul>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_3ZHES486">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_FXUE59FI" class="item preprint">
+			<h2>Decentralized Structural-RNN for Robot Crowd Navigation with Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Preprint</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Shuijing Liu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Peixin Chang</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Weihang Liang</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Neeloy Chakraborty</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Katherine Driggs-Campbell</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Safe and efficient navigation through human crowds is an 
+essential capability for mobile robots. Previous work on robot crowd 
+navigation assumes that the dynamics of all agents are known and 
+well-defined. In addition, the performance of previous methods 
+deteriorates in partially observable environments and environments with 
+dense crowds. To tackle these problems, we propose decentralized 
+structuralRecurrent Neural Network (DS-RNN), a novel network that 
+reasons about spatial and temporal relationships for robot decision 
+making in crowd navigation. We train our network with model-free deep 
+reinforcement learning without any expert supervision. We demonstrate 
+that our model outperforms previous methods in challenging crowd 
+navigation scenarios. We successfully transfer the policy learned in the
+ simulator to a real-world TurtleBot 2i. For more information, please 
+visit the project website at https://sites.google.com/view/ 
+crowdnav-ds-rnn/home.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2025-01-27</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.48550/arXiv.2011.04820">10.48550/arXiv.2011.04820</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="http://arxiv.org/abs/2011.04820">http://arxiv.org/abs/2011.04820</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:59:08 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>arXiv.org</td>
+					</tr>
+					<tr>
+					<th>Extra</th>
+						<td>arXiv:2011.04820 [cs.RO]</td>
+					</tr>
+					<tr>
+					<th>Repository</th>
+						<td>arXiv</td>
+					</tr>
+					<tr>
+					<th>Archive ID</th>
+						<td>arXiv:2011.04820</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:59:08 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:59:08 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="tags">Tags:</h3>
+				<ul class="tags">
+					<li>Computer Science - Machine Learning</li>
+					<li>Computer Science - Robotics</li>
+					<li>Computer Science - Artificial Intelligence</li>
+				</ul>
+				<h3 class="notes">Notes:</h3>
+				<ul class="notes">
+					<li id="item_DJGQLRQS">
+<p class="plaintext">Comment: Published as a conference paper in IEEE International Conference on Robotics and Automation (ICRA), 2021</p>
+					</li>
+				</ul>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_GD7EIGUC">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_X87LUJMP" class="item journalArticle">
+			<h2>DRL-VO: Learning to Navigate Through Crowded Dynamic Scenes Using Velocity Obstacles</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Journal Article</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Zhanteng Xie</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Philip Dames</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>This article proposes a novel learning-based control policy 
+with strong generalizability to new environments that enables a mobile 
+robot to navigate autonomously through spaces ﬁlled with both static 
+obstacles and dense crowds of pedestrians. The policy uses a unique 
+combination of input data to generate the desired steering angle and 
+forward velocity: a short history of lidar data, kinematic data about 
+nearby pedestrians, and a subgoal point. The policy is trained in a 
+reinforcement learning setting using a reward function that contains a 
+novel term based on velocity obstacles to guide the robot to actively 
+avoid pedestrians and move toward the goal. Through a series of 3-D 
+simulated experiments with up to 55 pedestrians, this control policy is 
+able to achieve a better balance between collision avoidance and speed 
+(i.e., higher success rate and faster average speed) than 
+state-of-the-art modelbased and learning-based policies, and it also 
+generalizes better to different crowd sizes and unseen environments. An 
+extensive series of hardware experiments demonstrate the ability of this
+ policy to directly work in different real-world environments with 
+different crowd sizes with zero retraining. Furthermore, a series of 
+simulated and hardware experiments show that the control policy also 
+works in highly constrained static environments on a different robot 
+platform without any additional training. Lastly, several important 
+lessons that can be applied to other robot learning systems are 
+summarized.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>8/2023</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/TRO.2023.3257549">10.1109/TRO.2023.3257549</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/10089196/">https://ieeexplore.ieee.org/document/10089196/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:52 AM</td>
+					</tr>
+					<tr>
+					<th>Short Title</th>
+						<td>DRL-VO</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html</td>
+					</tr>
+					<tr>
+					<th>Volume</th>
+						<td>39</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>2700-2719</td>
+					</tr>
+					<tr>
+					<th>Publication</th>
+						<td>IEEE Transactions on Robotics</td>
+					</tr>
+					<tr>
+					<th>ISSN</th>
+						<td>1552-3098, 1941-0468</td>
+					</tr>
+					<tr>
+					<th>Issue</th>
+						<td>4</td>
+					</tr>
+					<tr>
+					<th>Journal Abbr</th>
+						<td>IEEE Trans. Robot.</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:52 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:52 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_KBNZVDRC">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_QI832CMM" class="item preprint">
+			<h2>Fully Distributed Multi-Robot Collision Avoidance via Deep 
+Reinforcement Learning for Safe and Efficient Navigation in Complex 
+Scenarios</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Preprint</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Tingxiang Fan</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Pinxin Long</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Wenxi Liu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Jia Pan</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Developing a safe and efﬁcient collision avoidance policy for 
+multiple robots is challenging in the decentralized scenarios where each
+ robot generates its paths with the limited observation of other robots’
+ states and intentions. Prior distributed multi-robot collision 
+avoidance systems often require frequent inter-robot communication or 
+agent-level features to plan a local collision-free action, which is not
+ robust and computationally prohibitive. In addition, the performance of
+ these methods is not comparable to their centralized counterparts in 
+practice.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2018-08-11</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.48550/arXiv.1808.03841">10.48550/arXiv.1808.03841</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="http://arxiv.org/abs/1808.03841">http://arxiv.org/abs/1808.03841</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:31 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>arXiv.org</td>
+					</tr>
+					<tr>
+					<th>Extra</th>
+						<td>arXiv:1808.03841 [cs.RO]</td>
+					</tr>
+					<tr>
+					<th>Repository</th>
+						<td>arXiv</td>
+					</tr>
+					<tr>
+					<th>Archive ID</th>
+						<td>arXiv:1808.03841</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:31 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:31 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="tags">Tags:</h3>
+				<ul class="tags">
+					<li>Computer Science - Robotics</li>
+				</ul>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_MCGIHNIH">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_RTV44V2V" class="item preprint">
+			<h2>Getting Robots Unfrozen and Unlost in Dense Pedestrian Crowds</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Preprint</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Tingxiang Fan</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Xinjing Cheng</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Jia Pan</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Pinxin Long</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Wenxi Liu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Ruigang Yang</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Dinesh Manocha</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>We aim to enable a mobile robot to navigate through 
+environments with dense crowds, e.g., shopping malls, canteens, train 
+stations, or airport terminals. In these challenging environments, 
+existing approaches suffer from two common problems: the robot may get 
+frozen and cannot make any progress toward its goal, or it may get lost 
+due to severe occlusions inside a crowd. Here we propose a navigation 
+framework that handles the robot freezing and the navigation lost 
+problems simultaneously. First, we enhance the robot’s mobility and 
+unfreeze the robot in the crowd using a reinforcement learning based 
+local navigation policy developed in our previous work [1], which 
+naturally takes into account the coordination between the robot and the 
+human. Secondly, the robot takes advantage of its excellent local 
+mobility to recover from its localization failure. In particular, it 
+dynamically chooses to approach a set of recovery positions with rich 
+features. To the best of our knowledge, our method is the ﬁrst approach 
+that simultaneously solves the freezing problem and the navigation lost 
+problem in dense crowds. We evaluate our method in both simulated and 
+real-world environments and demonstrate that it outperforms the 
+state-of-the-art approaches. Videos are available at 
+https://sites.google.com/view/rlslam.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2018-09-30</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.48550/arXiv.1810.00352">10.48550/arXiv.1810.00352</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="http://arxiv.org/abs/1810.00352">http://arxiv.org/abs/1810.00352</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:29 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>arXiv.org</td>
+					</tr>
+					<tr>
+					<th>Extra</th>
+						<td>arXiv:1810.00352 [cs.RO]</td>
+					</tr>
+					<tr>
+					<th>Repository</th>
+						<td>arXiv</td>
+					</tr>
+					<tr>
+					<th>Archive ID</th>
+						<td>arXiv:1810.00352</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:29 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:29 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="tags">Tags:</h3>
+				<ul class="tags">
+					<li>Computer Science - Robotics</li>
+				</ul>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_TC72MUSK">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_5YL6SLCG" class="item conferencePaper">
+			<h2>L2B: Learning to Balance the Safety-Efficiency Trade-off in Interactive Crowd-aware Robot Navigation</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Conference Paper</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Mai Nishimura</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Ryo Yonetani</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>This work presents a deep reinforcement learning framework for
+ interactive navigation in a crowded place. Our proposed Learning to 
+Balance (L2B) framework enables mobile robot agents to steer safely 
+towards their destinations by avoiding collisions with a crowd, while 
+actively clearing a path by asking nearby pedestrians to make room, if 
+necessary, to keep their travel efﬁcient. We observe that the safety and
+ efﬁciency requirements in crowd-aware navigation have a tradeoff in the
+ presence of social dilemmas between the agent and the crowd. On the one
+ hand, intervening in pedestrian paths too much to achieve instant 
+efﬁciency will result in collapsing a natural crowd ﬂow and may 
+eventually put everyone, including the self, at risk of collisions. On 
+the other hand, keeping in silence to avoid every single collision will 
+lead to the agent’s inefﬁcient travel. With this observation, our L2B 
+framework augments the reward function used in learning an interactive 
+navigation policy to penalize frequent active path clearing and passive 
+collision avoidance, which substantially improves the balance of the 
+safety-efﬁciency trade-off. We evaluate our L2B framework in a 
+challenging crowd simulation and demonstrate its superiority, in terms 
+of both navigation success and collision rate, over a state-of-the-art 
+navigation approach.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2020-10-24</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/IROS45743.2020.9341519">10.1109/IROS45743.2020.9341519</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/9341519/">https://ieeexplore.ieee.org/document/9341519/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:59:03 AM</td>
+					</tr>
+					<tr>
+					<th>Short Title</th>
+						<td>L2B</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html</td>
+					</tr>
+					<tr>
+					<th>Publisher</th>
+						<td>IEEE</td>
+					</tr>
+					<tr>
+					<th>Place</th>
+						<td>Las Vegas, NV, USA</td>
+					</tr>
+					<tr>
+					<th>ISBN</th>
+						<td>978-1-7281-6212-6</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>11004-11010</td>
+					</tr>
+					<tr>
+					<th>Proceedings Title</th>
+						<td>2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</td>
+					</tr>
+					<tr>
+					<th>Conference Name</th>
+						<td>2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:59:03 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:59:03 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_WCS222K7">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_S34K73EK" class="item conferencePaper">
+			<h2>Learning Crowd-Aware Robot Navigation from Challenging Environments via Distributed Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Conference Paper</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Sango Matsuzaki</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Yuji Hasegawa</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>This paper presents a deep reinforcement learning (DRL) 
+sframework for safe and efﬁcient navigation in crowded environments. 
+Here, the robot learns cooperative behavior using a new reward function 
+that penalizes robot actions interfering with the pedestrian’s movement.
+ Also, we propose a simulated pedestrian policy reﬂecting data from 
+actual pedestrian movements. Furthermore, we introduce a collision 
+detection that considers the pedestrian’s personal space to generate 
+afﬁnity robot behavior. To efﬁciently explore this simulation 
+environment, we propose distributed learning using Ape-X [1]. We 
+deployed the robot in a real environment and veriﬁed its crowd-aware 
+navigation performance compared with an actual human in terms of path 
+length, travel time, and the number of abrupt avoidances.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2022-5-23</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/ICRA46639.2022.9812011">10.1109/ICRA46639.2022.9812011</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/9812011/">https://ieeexplore.ieee.org/document/9812011/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:59:15 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://doi.org/10.15223/policy-029</td>
+					</tr>
+					<tr>
+					<th>Publisher</th>
+						<td>IEEE</td>
+					</tr>
+					<tr>
+					<th>Place</th>
+						<td>Philadelphia, PA, USA</td>
+					</tr>
+					<tr>
+					<th>ISBN</th>
+						<td>978-1-7281-9681-7</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>4730-4736</td>
+					</tr>
+					<tr>
+					<th>Proceedings Title</th>
+						<td>2022 International Conference on Robotics and Automation (ICRA)</td>
+					</tr>
+					<tr>
+					<th>Conference Name</th>
+						<td>2022 IEEE International Conference on Robotics and Automation (ICRA)</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:59:15 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:59:15 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_426NB5JW">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_5BBVVYXU" class="item preprint">
+			<h2>Motion Planning Among Dynamic, Decision-Making Agents with Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Preprint</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Michael Everett</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Yu Fan Chen</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Jonathan P. How</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Robots that navigate among pedestrians use collision avoidance
+ algorithms to enable safe and efﬁcient operation. Recent works present 
+deep reinforcement learning as a framework to model the complex 
+interactions and cooperation. However, they are implemented using key 
+assumptions about other agents’ behavior that deviate from reality as 
+the number of agents in the environment increases. This work extends our
+ previous approach to develop an algorithm that learns collision 
+avoidance among a variety of types of dynamic agents without assuming 
+they follow any particular behavior rules. This work also introduces a 
+strategy using LSTM that enables the algorithm to use observations of an
+ arbitrary number of other agents, instead of previous methods that have
+ a ﬁxed observation size. The proposed algorithm outperforms our 
+previous approach in simulation as the number of agents increases, and 
+the algorithm is demonstrated on a fully autonomous robotic vehicle 
+traveling at human walking speed, without the use of a 3D Lidar.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2018-05-04</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.48550/arXiv.1805.01956">10.48550/arXiv.1805.01956</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="http://arxiv.org/abs/1805.01956">http://arxiv.org/abs/1805.01956</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:37 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>arXiv.org</td>
+					</tr>
+					<tr>
+					<th>Extra</th>
+						<td>arXiv:1805.01956 [cs.RO]</td>
+					</tr>
+					<tr>
+					<th>Repository</th>
+						<td>arXiv</td>
+					</tr>
+					<tr>
+					<th>Archive ID</th>
+						<td>arXiv:1805.01956</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:37 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:37 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="tags">Tags:</h3>
+				<ul class="tags">
+					<li>Computer Science - Machine Learning</li>
+					<li>Computer Science - Robotics</li>
+					<li>Computer Science - Artificial Intelligence</li>
+				</ul>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_C2B9GGP3">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_2F6MWW4A" class="item conferencePaper">
+			<h2>Relative Velocity-Based Reward Model for Socially-Aware Navigation with Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Conference Paper</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Vinu Maddumage</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Sarath Kodagoda</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Marc G. Carmichael</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Amal Gunatilake</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Karthick Thiyagarajan</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Jodi Martin</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Mobile robots are increasingly deployed in shared environments
+ where they must learn to navigate alongside humans. Deep Reinforcement 
+Learning (DRL) techniques have shown promise in developing navigation 
+policies that account for interactions within crowds, fostering socially
+ acceptable movement. However, these techniques often depend heavily on 
+collision avoidance rewards to ensure safe navigation. In this study, we
+ introduce a novel reward component based on relative velocity for 
+collision avoidance, which integrates both the robot’s and humans’ 
+kinematics within personal distance constraints. We conducted a thorough
+ evaluation comparing this new reward model against a conventional one 
+in simulated environments using advanced DRL methods. Our findings 
+indicate that the proposed reward model improves the robots’ ability to 
+avoid collisions and navigate towards their goals while being socially 
+acceptable.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2025-5-19</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/ICRA55743.2025.11127606">10.1109/ICRA55743.2025.11127606</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/11127606/">https://ieeexplore.ieee.org/document/11127606/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:44 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://doi.org/10.15223/policy-029</td>
+					</tr>
+					<tr>
+					<th>Publisher</th>
+						<td>IEEE</td>
+					</tr>
+					<tr>
+					<th>Place</th>
+						<td>Atlanta, GA, USA</td>
+					</tr>
+					<tr>
+					<th>ISBN</th>
+						<td>979-8-3315-4139-2</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>10448-10454</td>
+					</tr>
+					<tr>
+					<th>Proceedings Title</th>
+						<td>2025 IEEE International Conference on Robotics and Automation (ICRA)</td>
+					</tr>
+					<tr>
+					<th>Conference Name</th>
+						<td>2025 IEEE International Conference on Robotics and Automation (ICRA)</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:44 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:44 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_6NWSH2PA">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_4AMWBJPX" class="item journalArticle">
+			<h2>Robot Mapless Navigation in VUCA Environments via Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Journal Article</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Bingxin Xue</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Fengyu Zhou</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Chaoqun Wang</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Ming Gao</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Lei Yin</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Mobile robots operating in unknown social environments demand 
+the ability to navigate among crowds and other obstacles in a safe and 
+socially compliant manner without prior maps. This work proposes a deep 
+reinforcement learning framework for robot mapless navigation in such 
+unknown congested and cluttered scenarios. A value network integrating 
+crowd and static obstacle information is developed for robot 
+decision-making, where spatialtemporal reasoning and lidar map are 
+leveraged to comprehend the surrounding environment. Based on the 
+relative velocities between the robot and humans, the hazardous areas 
+that the robot should avoid are formulated. Accordingly, an original 
+reward function is put forward for safe and socially compliant robot 
+navigation. Extensive simulation experiments demonstrate the superiority
+ of the proposed framework, which outperforms the state-of-theart 
+methods in terms of success rate (up to 44% increase) and discomfort 
+frequency (up to 74.28% decrease). Additionally, we validate the 
+real-time performance and practicality of our approach by successfully 
+navigating a robot in real-world complicated scenes.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>1/2025</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/TIE.2024.3404113">10.1109/TIE.2024.3404113</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/10561574/">https://ieeexplore.ieee.org/document/10561574/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:47 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html</td>
+					</tr>
+					<tr>
+					<th>Volume</th>
+						<td>72</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>639-649</td>
+					</tr>
+					<tr>
+					<th>Publication</th>
+						<td>IEEE Transactions on Industrial Electronics</td>
+					</tr>
+					<tr>
+					<th>ISSN</th>
+						<td>0278-0046, 1557-9948</td>
+					</tr>
+					<tr>
+					<th>Issue</th>
+						<td>1</td>
+					</tr>
+					<tr>
+					<th>Journal Abbr</th>
+						<td>IEEE Trans. Ind. Electron.</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:47 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:47 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_I55G32RI">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_UXI7EUM2" class="item preprint">
+			<h2>Robot Navigation in Constrained Pedestrian Environments using Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Preprint</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Claudia Pérez-D'Arpino</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Can Liu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Patrick Goebel</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Roberto Martín-Martín</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Silvio Savarese</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Navigating ﬂuently around pedestrians is a necessary 
+capability for mobile robots deployed in human environments, such as 
+buildings and homes. While research on social navigation has focused 
+mainly on the scalability with the number of pedestrians in open spaces,
+ typical indoor environments present the additional challenge of 
+constrained spaces such as corridors and doorways that limit 
+maneuverability and inﬂuence patterns of pedestrian interaction. We 
+present an approach based on reinforcement learning (RL) to learn 
+policies capable of dynamic adaptation to the presence of moving 
+pedestrians while navigating between desired locations in constrained 
+environments. The policy network receives guidance from a motion planner
+ that provides waypoints to follow a globally planned trajectory, 
+whereas RL handles the local interactions. We explore a compositional 
+principle for multi-layout training and ﬁnd that policies trained in a 
+small set of geometrically simple layouts successfully generalize to 
+more complex unseen layouts that exhibit composition of the structural 
+elements available during training. Going beyond walls-world like 
+domains, we show transfer of the learned policy to unseen 3D 
+reconstructions of two real environments. These results support the 
+applicability of the compositional principle to navigation in real-world
+ buildings and indicate promising usage of multi-agent simulation within
+ reconstructed environments for tasks that involve interaction.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2020-11-16</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.48550/arXiv.2010.08600">10.48550/arXiv.2010.08600</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="http://arxiv.org/abs/2010.08600">http://arxiv.org/abs/2010.08600</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:34 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>arXiv.org</td>
+					</tr>
+					<tr>
+					<th>Extra</th>
+						<td>arXiv:2010.08600 [cs.RO]</td>
+					</tr>
+					<tr>
+					<th>Repository</th>
+						<td>arXiv</td>
+					</tr>
+					<tr>
+					<th>Archive ID</th>
+						<td>arXiv:2010.08600</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:34 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:34 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="tags">Tags:</h3>
+				<ul class="tags">
+					<li>Computer Science - Robotics</li>
+					<li>Computer Science - Artificial Intelligence</li>
+				</ul>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_NTQ6VQ3E">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_AVHAY95P" class="item conferencePaper">
+			<h2>Robot Navigation in Crowded Environments Using Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Conference Paper</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Lucia Liu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Daniel Dugas</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Gianluca Cesari</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Roland Siegwart</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Renaud Dube</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Mobile robots operating in public environments require the 
+ability to navigate among humans and other obstacles in a socially 
+compliant and safe manner. This work presents a combined imitation 
+learning and deep reinforcement learning approach for motion planning in
+ such crowded and cluttered environments. By separately processing 
+information related to static and dynamic objects, we enable our network
+ to learn motion patterns that are tailored to real-world environments. 
+Our model is also designed such that it can handle usual cases in which 
+robots can be equipped with sensor suites that only offer limited ﬁeld 
+of view. Our model outperforms current state-ofthe-art approaches, which
+ is shown in simulated environments containing human-like agents and 
+static obstacles. Additionally, we demonstrate the real-time performance
+ and applicability of our model by successfully navigating a robotic 
+platform through real-world environments.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2020-10-24</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/IROS45743.2020.9341540">10.1109/IROS45743.2020.9341540</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/9341540/">https://ieeexplore.ieee.org/document/9341540/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:59:06 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html</td>
+					</tr>
+					<tr>
+					<th>Publisher</th>
+						<td>IEEE</td>
+					</tr>
+					<tr>
+					<th>Place</th>
+						<td>Las Vegas, NV, USA</td>
+					</tr>
+					<tr>
+					<th>ISBN</th>
+						<td>978-1-7281-6212-6</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>5671-5677</td>
+					</tr>
+					<tr>
+					<th>Proceedings Title</th>
+						<td>2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</td>
+					</tr>
+					<tr>
+					<th>Conference Name</th>
+						<td>2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:59:06 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:59:06 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_SXDZ66VY">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_X5JHV5SU" class="item journalArticle">
+			<h2>Socially Conscious Navigation of Mobile Robots Based on Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Journal Article</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Yuqi Kong</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Xiaofei Gong</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Yao Wang</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Jiajie Yu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Bo Lu</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Wenzheng Chi</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Lining Sun</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>In a human–robot coexisting environment, mobile robots need to
+ navigate between humans and other obstacles in a way that conforms to 
+social norms. The high dynamism and uncertainty of human–robot 
+coexisting environments pose new challenges to robot motion planning. To
+ solve this problem, this study proposes a navigation strategy based on 
+deep reinforcement learning (DRL) for mobile robots in crowded and 
+complex environments. In this work, an EmoHarmony social distance 
+mapping function (ESDMF) is proposed to describe the relationship 
+between psychological comfort and distance in real life. Thus, different
+ social distances will generate different punishment intensities 
+accordingly. To handle obstacles other than humans, we also added the 
+modeling of obstacles. In the experiment, the performance of the 
+algorithm is evaluated by the success rate, collision rate, timeout 
+rate, navigation time, trajectory length, and danger frequency. The 
+experimental results show that the performance of this algorithm is 
+better than state-of-the-art algorithms in the human–robot coexisting 
+environment.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>12/2025</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.1109/TIE.2025.3566742">10.1109/TIE.2025.3566742</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="https://ieeexplore.ieee.org/document/11039056/">https://ieeexplore.ieee.org/document/11039056/</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:40 AM</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>DOI.org (Crossref)</td>
+					</tr>
+					<tr>
+					<th>License</th>
+						<td>https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html</td>
+					</tr>
+					<tr>
+					<th>Volume</th>
+						<td>72</td>
+					</tr>
+					<tr>
+					<th>Pages</th>
+						<td>13542-13550</td>
+					</tr>
+					<tr>
+					<th>Publication</th>
+						<td>IEEE Transactions on Industrial Electronics</td>
+					</tr>
+					<tr>
+					<th>ISSN</th>
+						<td>0278-0046, 1557-9948</td>
+					</tr>
+					<tr>
+					<th>Issue</th>
+						<td>12</td>
+					</tr>
+					<tr>
+					<th>Journal Abbr</th>
+						<td>IEEE Trans. Ind. Electron.</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:40 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:41 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_GHZ9LGY5">PDF					</li>
+				</ul>
+			</li>
+
+
+			<li id="item_T2X24DGB" class="item preprint">
+			<h2>Socially Integrated Navigation: A Social Acting Robot with Deep Reinforcement Learning</h2>
+				<table>
+					<tbody><tr>
+						<th>Item Type</th>
+						<td>Preprint</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Daniel Flögel</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Lars Fischer</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Thomas Rudolf</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Tobias Schürmann</td>
+					</tr>
+					<tr>
+						<th class="author">Author</th>
+						<td>Sören Hohmann</td>
+					</tr>
+					<tr>
+					<th>Abstract</th>
+						<td>Mobile robots are being used on a large scale in various 
+crowded situations and become part of our society. The socially 
+acceptable navigation behavior of a mobile robot with individual human 
+consideration is an essential requirement for scalable applications and 
+human acceptance. Deep Reinforcement Learning (DRL) approaches are 
+recently used to learn a robot’s navigation policy and to model the 
+complex interactions between robots and humans. We propose to divide 
+existing DRL-based navigation approaches based on the robot’s exhibited 
+social behavior and distinguish between social collision avoidance with a
+ lack of social behavior and socially aware approaches with explicit 
+predefined social behavior. In addition, we propose a novel socially 
+integrated navigation approach where the robot’s social behavior is 
+adaptive and emerges from the interaction with humans. The formulation 
+of our approach is derived from a sociological definition, which states 
+that social acting is oriented toward the acting of others. The DRL 
+policy is trained in an environment where other agents interact socially
+ integrated and reward the robot’s behavior individually. The simulation
+ results indicate that the proposed socially integrated navigation 
+approach outperforms a socially aware approach in terms of ego 
+navigation performance while significantly reducing the negative impact 
+on all agents within the environment.</td>
+					</tr>
+					<tr>
+					<th>Date</th>
+						<td>2024-07-26</td>
+					</tr>
+					<tr>
+					<th>DOI</th>
+						<td><a href="http://doi.org/10.48550/arXiv.2403.09793">10.48550/arXiv.2403.09793</a></td>
+					</tr>
+					<tr>
+					<th>URL</th>
+						<td><a href="http://arxiv.org/abs/2403.09793">http://arxiv.org/abs/2403.09793</a></td>
+					</tr>
+					<tr>
+					<th>Accessed</th>
+						<td>11/12/2026, 4:58:57 AM</td>
+					</tr>
+					<tr>
+					<th>Short Title</th>
+						<td>Socially Integrated Navigation</td>
+					</tr>
+					<tr>
+					<th>Language</th>
+						<td>en</td>
+					</tr>
+					<tr>
+					<th>Library Catalog</th>
+						<td>arXiv.org</td>
+					</tr>
+					<tr>
+					<th>Extra</th>
+						<td>arXiv:2403.09793 [cs.RO]</td>
+					</tr>
+					<tr>
+					<th>Repository</th>
+						<td>arXiv</td>
+					</tr>
+					<tr>
+					<th>Archive ID</th>
+						<td>arXiv:2403.09793</td>
+					</tr>
+					<tr>
+					<th>Date Added</th>
+						<td>11/12/2026, 4:58:57 AM</td>
+					</tr>
+					<tr>
+					<th>Modified</th>
+						<td>11/12/2026, 4:58:57 AM</td>
+					</tr>
+				</tbody></table>
+				<h3 class="tags">Tags:</h3>
+				<ul class="tags">
+					<li>Computer Science - Machine Learning</li>
+					<li>Computer Science - Robotics</li>
+					<li>Electrical Engineering and Systems Science - Systems and Control</li>
+					<li>Computer Science - Artificial Intelligence</li>
+				</ul>
+				<h3 class="notes">Notes:</h3>
+				<ul class="notes">
+					<li id="item_EDINJL6C">
+<p class="plaintext">Comment: Accepted at 2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</p>
+					</li>
+				</ul>
+				<h3 class="attachments">Attachments</h3>
+				<ul class="attachments">
+					<li id="item_GPEQ5J42">PDF					</li>
+				</ul>
+			</li>
+
+		</ul>
+	
+</body></html>

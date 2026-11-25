@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>amr_bringup</name>
+  <version>0.1.0</version>
+  <description>Launch files, Nav2 parameters and RViz configurations for the warehouse AMR simulation.</description>
+  <maintainer email="maintainer@example.com">warehouse-amr-sim team</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>amr_description</exec_depend>
+  <exec_depend>amr_sim_core</exec_depend>
+  <exec_depend>amr_sim_nodes</exec_depend>
+  <exec_depend>amr_gazebo_plugins</exec_depend>
+  <exec_depend>warehouse_world</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

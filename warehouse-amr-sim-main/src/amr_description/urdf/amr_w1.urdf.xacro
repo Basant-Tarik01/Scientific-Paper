@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<!--
+  AMR-W1: differential-drive warehouse AMR.
+  All dimensions come from amr_sim_core/data/robot/amr_w1.yaml (shared with the 2D simulator).
+
+  Frames: base_footprint (floor, centre of footprint) -> base_link -> {left,right}_wheel_link,
+          front/rear_caster_link, lidar_link, imu_link, deck_link [-> payload_link]
+
+  Gazebo topics (before the fault_injector):
+    /cmd_vel_hw   (in)  wheel-level command, published by fault_injector
+    /odom_raw     (out) encoder odometry (no TF; fault_injector publishes /odom + odom->base_footprint)
+    /scan_raw     (out) 360 deg LaserScan (fault_injector publishes the degraded /scan)
+    /imu          (out)
+    /ground_truth/odom (out) privileged ground-truth pose/twist (metrics, labels)
+-->
+<robot name="amr_w1" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="payload_mass" default="0.0"/>
+  <xacro:arg name="robot_config" default="$(find amr_sim_core)/data/robot/amr_w1.yaml"/>
+
+  <xacro:property name="cfg" value="${xacro.load_yaml('$(arg robot_config)')}"/>
+  <xacro:property name="payload" value="$(arg payload_mass)"/>
+  <xacro:property name="PI" value="3.14159265359"/>
+
+  <xacro:property name="L" value="${cfg['base']['length']}"/>
+  <xacro:property name="W" value="${cfg['base']['width']}"/>
+  <xacro:property name="zb" value="${cfg['base']['bottom_z']}"/>
+  <xacro:property name="zt" value="${cfg['base']['top_z']}"/>
+  <xacro:property name="m_base" value="${cfg['base']['mass']}"/>
+  <xacro:property name="zd" value="${cfg['deck']['z']}"/>
+  <xacro:property name="td" value="${cfg['deck']['thickness']}"/>
+  <xacro:property name="m_deck" value="${cfg['deck']['mass']}"/>
+  <xacro:property name="wr" value="${cfg['wheels']['radius']}"/>
+  <xacro:property name="ww" value="${cfg['wheels']['width']}"/>
+  <xacro:property name="wsep" value="${cfg['wheels']['separation']}"/>
+  <xacro:property name="wx" value="${cfg['wheels']['x_offset']}"/>
+  <xacro:property name="m_wheel" value="${cfg['wheels']['mass']}"/>
+  <xacro:property name="cr" value="${cfg['casters']['radius']}"/>
+  <xacro:property name="cx" value="${cfg['casters']['x_offset']}"/>
+  <xacro:property name="drive" value="${cfg['drive']}"/>
+  <xacro:property name="lidar" value="${cfg['lidar']}"/>
+  <xacro:property name="ps" value="${cfg['payload']['size']}"/>
+
+  <!-- ============================================================ inertia helpers -->
+  <xacro:macro name="box_inertia" params="m x y z">
+    <inertia ixx="${m*(y*y+z*z)/12.0}" iyy="${m*(x*x+z*z)/12.0}" izz="${m*(x*x+y*y)/12.0}" ixy="0" ixz="0" iyz="0"/>
+  </xacro:macro>
+  <xacro:macro name="cyl_inertia" params="m r h">
+    <inertia ixx="${m*(3*r*r+h*h)/12.0}" iyy="${m*(3*r*r+h*h)/12.0}" izz="${m*r*r/2.0}" ixy="0" ixz="0" iyz="0"/>
+  </xacro:macro>
+
+  <material name="body_grey"><color rgba="0.25 0.27 0.30 1"/></material>
+  <material name="deck_grey"><color rgba="0.55 0.57 0.60 1"/></material>
+  <material name="safety_yellow"><color rgba="0.95 0.78 0.05 1"/></material>
+  <material name="black"><color rgba="0.05 0.05 0.05 1"/></material>
+  <material name="carton"><color rgba="0.72 0.55 0.35 1"/></material>
+
+  <!-- ============================================================ chassis -->
+  <link name="base_footprint"/>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 ${(zb+zt)/2}"/>
+      <geometry><box size="${L} ${W} ${zt-zb}"/></geometry>
+      <material name="body_grey"/>
+    </visual>
+    <!-- yellow bumper strip -->
+    <visual>
+      <origin xyz="0 0 ${zb+0.03}"/>
+      <geometry><box size="${L+0.01} ${W+0.01} 0.04"/></geometry>
+      <material name="safety_yellow"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${(zb+zt)/2}"/>
+      <geometry><box size="${L} ${W} ${zt-zb}"/></geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 ${(zb+zt)/2}"/>
+      <mass value="${m_base}"/>
+      <xacro:box_inertia m="${m_base}" x="${L}" y="${W}" z="${zt-zb}"/>
+    </inertial>
+  </link>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
+
+  <!-- payload deck above the LiDAR slot (corner posts are visual only, so the scan plane is free) -->
+  <link name="deck_link">
+    <visual>
+      <geometry><box size="${L} ${W} ${td}"/></geometry>
+      <material name="deck_grey"/>
+    </visual>
+    <xacro:macro name="post" params="sx sy">
+      <visual>
+        <origin xyz="${sx*(L/2-0.03)} ${sy*(W/2-0.03)} ${-(zd-zt)/2-td/2}"/>
+        <geometry><cylinder radius="0.012" length="${zd-zt}"/></geometry>
+        <material name="black"/>
+      </visual>
+    </xacro:macro>
+    <xacro:post sx="1" sy="1"/>
+    <xacro:post sx="1" sy="-1"/>
+    <xacro:post sx="-1" sy="1"/>
+    <xacro:post sx="-1" sy="-1"/>
+    <collision>
+      <geometry><box size="${L} ${W} ${td}"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="${m_deck}"/>
+      <xacro:box_inertia m="${m_deck}" x="${L}" y="${W}" z="${td}"/>
+    </inertial>
+  </link>
+  <joint name="deck_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="deck_link"/>
+    <origin xyz="0 0 ${zd+td/2}"/>
+  </joint>
+
+  <!-- optional payload (spawn-time mass; the fault_injector's actuation model also uses it) -->
+  <xacro:if value="${float(payload) > 0.01}">
+    <link name="payload_link">
+      <visual>
+        <geometry><box size="${ps[0]} ${ps[1]} ${ps[2]}"/></geometry>
+        <material name="carton"/>
+      </visual>
+      <collision>
+        <geometry><box size="${ps[0]} ${ps[1]} ${ps[2]}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="${float(payload)}"/>
+        <xacro:box_inertia m="${float(payload)}" x="${ps[0]}" y="${ps[1]}" z="${ps[2]}"/>
+      </inertial>
+    </link>
+    <joint name="payload_joint" type="fixed">
+      <parent link="deck_link"/>
+      <child link="payload_link"/>
+      <origin xyz="0 0 ${td/2+ps[2]/2}"/>
+    </joint>
+  </xacro:if>
+
+  <!-- ============================================================ drive wheels -->
+  <xacro:macro name="wheel" params="side sy">
+    <link name="${side}_wheel_link">
+      <visual>
+        <geometry><cylinder radius="${wr}" length="${ww}"/></geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry><cylinder radius="${wr}" length="${ww}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="${m_wheel}"/>
+        <xacro:cyl_inertia m="${m_wheel}" r="${wr}" h="${ww}"/>
+      </inertial>
+    </link>
+    <joint name="${side}_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="${side}_wheel_link"/>
+      <origin xyz="${wx} ${sy*wsep/2} ${wr}" rpy="${-PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+    <gazebo reference="${side}_wheel_link">
+      <mu1>1.0</mu1><mu2>1.0</mu2><kp>1e6</kp><kd>100</kd><minDepth>0.001</minDepth>
+      <material>Gazebo/FlatBlack</material>
+    </gazebo>
+  </xacro:macro>
+  <xacro:wheel side="left" sy="1"/>
+  <xacro:wheel side="right" sy="-1"/>
+
+  <!-- ============================================================ casters -->
+  <xacro:macro name="caster" params="name x">
+    <link name="${name}_caster_link">
+      <visual>
+        <geometry><sphere radius="${cr}"/></geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry><sphere radius="${cr}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.5"/>
+        <inertia ixx="${0.4*0.5*cr*cr}" iyy="${0.4*0.5*cr*cr}" izz="${0.4*0.5*cr*cr}" ixy="0" ixz="0" iyz="0"/>
+      </inertial>
+    </link>
+    <joint name="${name}_caster_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="${name}_caster_link"/>
+      <origin xyz="${x} 0 ${cr}"/>
+    </joint>
+    <gazebo reference="${name}_caster_link">
+      <mu1>0.0</mu1><mu2>0.0</mu2><kp>1e6</kp><kd>100</kd>
+      <material>Gazebo/FlatBlack</material>
+    </gazebo>
+  </xacro:macro>
+  <xacro:caster name="front" x="${cx}"/>
+  <xacro:caster name="rear" x="${-cx}"/>
+
+  <!-- ============================================================ sensors -->
+  <link name="lidar_link">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry><cylinder radius="0.04" length="0.05"/></geometry>
+      <material name="black"/>
+    </visual>
+    <inertial>
+      <mass value="0.2"/>
+      <xacro:cyl_inertia m="0.2" r="0.04" h="0.05"/>
+    </inertial>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="${lidar['x']} ${lidar['y']} ${lidar['z']}"/>
+  </joint>
+
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.01"/>
+      <inertia ixx="1e-6" iyy="1e-6" izz="1e-6" ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 ${zb+0.05}"/>
+  </joint>
+
+  <!-- ============================================================ Gazebo -->
+  <gazebo reference="base_link"><material>Gazebo/DarkGrey</material></gazebo>
+  <gazebo reference="deck_link"><material>Gazebo/Grey</material></gazebo>
+  <gazebo reference="lidar_link"><material>Gazebo/Black</material></gazebo>
+  <xacro:if value="${float(payload) > 0.01}">
+    <gazebo reference="payload_link"><material>Gazebo/Wood</material></gazebo>
+  </xacro:if>
+
+  <gazebo reference="lidar_link">
+    <sensor type="ray" name="lidar">
+      <always_on>true</always_on>
+      <visualize>false</visualize>
+      <update_rate>${lidar['rate']}</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>${lidar['samples']}</samples>
+            <resolution>1</resolution>
+            <min_angle>${-PI}</min_angle>
+            <max_angle>${PI - 2*PI/lidar['samples']}</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>${lidar['range_min']}</min>
+          <max>${lidar['range_max']}</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>${lidar['noise_std']}</stddev>
+        </noise>
+      </ray>
+      <plugin name="lidar_driver" filename="libgazebo_ros_ray_sensor.so">
+        <ros><remapping>~/out:=scan_raw</remapping></ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="imu_link">
+    <sensor type="imu" name="imu">
+      <always_on>true</always_on>
+      <update_rate>${cfg['imu']['rate']}</update_rate>
+      <imu>
+        <angular_velocity>
+          <z><noise type="gaussian"><mean>0</mean><stddev>0.002</stddev></noise></z>
+        </angular_velocity>
+        <linear_acceleration>
+          <x><noise type="gaussian"><mean>0</mean><stddev>0.02</stddev></noise></x>
+          <y><noise type="gaussian"><mean>0</mean><stddev>0.02</stddev></noise></y>
+        </linear_acceleration>
+      </imu>
+      <plugin name="imu_driver" filename="libgazebo_ros_imu_sensor.so">
+        <ros><remapping>~/out:=imu</remapping></ros>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        <frame_name>imu_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <!-- The physical motor limits are generous here; the payload/torque-dependent acceleration limit
+         is applied in fault_injector (amr_sim_core.faults.ActuationModel), identical to the 2D sim. -->
+    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <ros>
+        <remapping>cmd_vel:=cmd_vel_hw</remapping>
+        <remapping>odom:=odom_raw</remapping>
+      </ros>
+      <update_rate>50</update_rate>
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>${wsep}</wheel_separation>
+      <wheel_diameter>${2*wr}</wheel_diameter>
+      <max_wheel_torque>40</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>false</publish_odom_tf>
+      <publish_wheel_tf>false</publish_wheel_tf>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+      <odometry_source>0</odometry_source>
+    </plugin>
+
+    <plugin name="joint_states" filename="libgazebo_ros_joint_state_publisher.so">
+      <update_rate>30</update_rate>
+      <joint_name>left_wheel_joint</joint_name>
+      <joint_name>right_wheel_joint</joint_name>
+    </plugin>
+
+    <plugin name="ground_truth" filename="libgazebo_ros_p3d.so">
+      <ros><remapping>odom:=ground_truth/odom</remapping></ros>
+      <body_name>base_footprint</body_name>
+      <frame_name>world</frame_name>
+      <update_rate>50</update_rate>
+    </plugin>
+  </gazebo>
+</robot>

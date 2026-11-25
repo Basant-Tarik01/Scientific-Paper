@@ -1,0 +1,20 @@
+# A1 (health-conditioned RL navigation): training distribution.
+# Two initial fault types as in the proposal (wheel-gain loss, command latency) plus LiDAR dropout.
+# Severities in [0.0, 0.6] are "training severities"; a1_eval_heldout.yaml uses (0.6, 0.9].
+name: a1_train
+world: warehouse_small
+episode: {max_time: 60.0, goal_tolerance: 0.3, min_goal_distance: 5.0, max_goal_distance: 15.0}
+pedestrians:
+  density: [low, medium, high]
+  distracted_fraction: 0.2      # these workers do not yield to the robot
+  speed: [0.8, 1.4]
+  dwell_prob: 0.4
+  dwell_time: [2.0, 8.0]
+payload: [0.0, 60.0]
+faults:
+  p_nominal: 0.2                # fraction of episodes with a perfectly healthy robot
+  types: [wheel_gain, cmd_latency, lidar_dropout]
+  max_simultaneous: 1
+  severity: [0.0, 0.6]
+  onset: [0.0, 0.0]             # fault present from the start of the episode
+metrics: {near_miss_distance: 0.5}

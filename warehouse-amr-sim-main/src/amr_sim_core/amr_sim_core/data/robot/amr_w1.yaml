@@ -1,0 +1,55 @@
+# AMR-W1: differential-drive warehouse AMR used in both simulators.
+# This file is the single source of truth for the robot: the URDF/xacro (amr_description) loads it
+# with xacro.load_yaml and the 2D simulator / fault models load it with amr_sim_core.robot.
+# All units SI (m, kg, s, rad, N m).
+name: amr_w1
+
+base:
+  length: 0.70            # x extent of the chassis (= footprint length)
+  width: 0.50             # y extent of the chassis (= footprint width)
+  bottom_z: 0.05          # chassis underside height above the floor
+  top_z: 0.22             # chassis top; the LiDAR scans through the slot between top_z and deck
+  mass: 45.0
+
+deck:                     # flat payload deck (supported above the LiDAR slot)
+  z: 0.30                 # underside of the deck plate
+  thickness: 0.04
+  mass: 4.0
+
+wheels:
+  radius: 0.08
+  width: 0.04
+  separation: 0.44        # distance between the two drive-wheel centres
+  x_offset: 0.0           # drive axle position along x (0 = centre of footprint)
+  mass: 1.5
+
+casters:
+  radius: 0.04
+  x_offset: 0.27          # front caster at +x_offset, rear caster at -x_offset
+
+drive:
+  max_wheel_torque: 3.0   # per wheel; with payload this limits acceleration (see faults.ActuationModel)
+  max_lin_vel: 1.0
+  max_rev_vel: 0.3
+  max_ang_vel: 1.5
+  max_lin_acc: 1.2        # nominal (controller) limit; the physical limit can be lower with payload/faults
+  max_ang_acc: 3.0
+  response_time: 0.05     # first-order actuator lag time constant
+
+lidar:                    # 360 deg 2D LiDAR in the slot between chassis and deck
+  x: 0.0
+  y: 0.0
+  z: 0.26
+  fov_deg: 360.0
+  samples: 720            # 0.5 deg resolution
+  rate: 10.0
+  range_min: 0.12
+  range_max: 12.0
+  noise_std: 0.01         # nominal sensor noise (faults add more)
+
+imu:
+  rate: 100.0
+
+payload:
+  max_mass: 60.0
+  size: [0.60, 0.40, 0.30]
